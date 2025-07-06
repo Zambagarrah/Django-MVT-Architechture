@@ -1,10 +1,36 @@
 {% extends 'base.html' %}
-
 {% block content %}
   <h1>Book List</h1>
+
+  <form method="get">
+    <input type="text" name="q" placeholder="Search by title or author" value="{{ query }}">
+    <select name="category">
+      <option value="">All Categories</option>
+      {% for cat in categories %}
+        <option value="{{ cat.name }}" {% if category_filter == cat.name %}selected{% endif %}>
+          {{ cat.name }}
+        </option>
+      {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+
   <ul>
     {% for book in books %}
-      <li>{{ book.title }} ({{ book.author }})</li>
+      <li>
+        <strong>{{ book.title }}</strong> by {{ book.author }}  
+        <br>📚 Category: {{ book.category.name }}
+        <br>🏷️ Tags: {% for tag in book.tags.all %} <span>{{ tag }}</span>{% endfor %}
+      </li>
+      <h1>Book List</h1>
+    <ul>
+      {% for book in books %}
+        <li>{{ book.title }} ({{ book.author }})</li>
+      {% endfor %}
+    </ul>
+      </li>
+    {% empty %}
+      <li>No books found.</li>
     {% endfor %}
   </ul>
 {% endblock %}

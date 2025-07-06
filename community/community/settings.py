@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'library.apps.LibraryConfig',
     'members.apps.MembersConfig',
+    'taggit'
 ]
 
 MIDDLEWARE = [
